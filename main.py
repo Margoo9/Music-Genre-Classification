@@ -107,8 +107,6 @@ def main():
         test_pred.append(genres_names[test_data[x][-1] - 1])
         predictions.append(genres_names[neighbour - 1])
     accuracy_count = accuracy_score(test_pred, predictions, normalize=False)
-    print("%s: %f" % ('F1 score is', f1_score(test_pred, predictions, average='weighted')))
-    print("%s: %f" % ('Precision score is', precision_score(test_pred, predictions, average='weighted', zero_division=1)))
     print("Accuracy: %0.2f%c" % (100 * accuracy_count / length, '%'))
 
     # test samples
