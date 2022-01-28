@@ -5,8 +5,12 @@ import os
 import operator
 import pickle
 import scipy.io.wavfile as wav
-from sklearn.metrics import accuracy_score, f1_score, precision_score
+from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix
+import seaborn as sn
+import pandas as pd
+import matplotlib.pyplot as plt
 
 
 def extract_features(path_to_dataset):
@@ -74,8 +78,6 @@ def predict_sample_data(file, genres_names):
     dataset = load_dataset("./genres_data.dmp")
     train_dataset, test_dataset = train_test_split(dataset, test_size=1, random_state=80)
     (rate, sig) = wav.read(file)
-    # length = sig.shape[0] / rate
-    # print(f"length = {length}s")
     mfcc_features = mfcc(sig, rate, winlen=0.02, winstep=0.01, numcep=15, nfft=1200, appendEnergy=False)
     covariance = np.cov(np.matrix.transpose(mfcc_features))
     mean_matrix = np.round(mfcc_features.mean(axis=0), 3)
@@ -116,7 +118,16 @@ def main():
     sample_genre = predict_sample_data(path_to_sample, genres_names)
     print("%s: %s" % ('The genre of your sample is', sample_genre))
 
+    grid_cm = pd.DataFrame(confusion_matrix(test_pred, predictions),
+                           index=["blues", "classical", "country", "disco", "hiphop", "jazz", "metal", "pop", "reggae",
+                                  "rock"],
+                           columns=["blues", "classical", "country", "disco", "hiphop", "jazz", "metal", "pop",
+                                    "reggae", "rock"])
+    plt.figure(figsize=(10, 7))
+    plt.title("Confusion matrix")
+    sn.heatmap(grid_cm, annot=True, cmap="hot")
+    plt.show()
+
 
 if __name__ == "__main__":
     main()
-
