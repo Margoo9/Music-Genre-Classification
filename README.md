@@ -16,7 +16,8 @@ The project implementation was based on the following steps:
 4. Visualize the confusion matrix of the test dataset.
 5. Check the genre of the chosen song with the use of a designed knn algorithm.
 
-The dataset used for this project is GTZAN dataset from: [https://www.kaggle.com/andradaolteanu/gtzan-dataset-music-genre-classification](https://www.kaggle.com/andradaolteanu/gtzan-dataset-music-genre-classification)
+The dataset used for this project is GTZAN dataset from: [https://www.kaggle.com/andradaolteanu/gtzan-dataset-music-genre-classification](https://www.kaggle.com/andradaolteanu/gtzan-dataset-music-genre-classification).
+
 It is divided into 10 different genres, 100 files each. The genres are:
 - blues
 - classical music
